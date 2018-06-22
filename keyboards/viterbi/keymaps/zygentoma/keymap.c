@@ -54,9 +54,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|----+----+----+----+----+----+----|    |----+----+----+----+----+----+----|
      NUHS, A  , S  , D  , F  , G  ,DEL ,     BSPC, H  , J  , K  , L  ,SCLN,NUHS,
   //|----+----+----+----+----+----+----|    |----+----+----+----+----+----+----|
-     LSFT, Z  , X  , C  , V  , B  , FN ,      FN , N  , M  ,COMM,DOT ,SLSH,SH_Q,
+     LSFT, Z  , X  , C  , V  , B  ,DEL ,     BSPC, N  , M  ,COMM,DOT ,SLSH,SH_Q,
   //|----+----+----+----+----+----+----|    |----+----+----+----+----+----+----|
-      FN ,LALT,LWIN,LCTL,ENT ,NMPD,NMPD,     CUR ,CUR ,SPC ,RCTL,RWIN,RALT, FN 
+     NMPD, FN ,LALT,LCTL,ENT ,NMPD,NMPD,     CUR ,CUR ,SPC ,RCTL,RALT, FN ,CUR
   //`----+----+----+----+----+----+----'    `----+----+----+----+----+----+----'
   ),
 
@@ -86,7 +86,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|----+----+----+----+----+----+----|    |----+----+----+----+----+----+----|
          ,    ,    ,    ,    ,    ,    ,         ,    ,    ,    ,    ,    ,    ,
   //|----+----+----+----+----+----+----|    |----+----+----+----+----+----+----|
-         ,LCTL,    ,LALT,    ,,        ,             ,,    ,RALT,    ,RCTL,
+         ,    ,LCTL,LALT,    ,,        ,             ,,    ,RALT,RCTL,    ,
   //`----+----+----+----+----+----+----'    `----+----+----+----+----+----+----'
   ),
 
@@ -124,11 +124,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|----+----+----+----+----+----+----|    |----+----+----+----+----+----+----|
      RSET,    ,    ,    ,    ,    ,    ,         ,    ,MNXT,VOLD,VOLU,MPLY,MUTE,
   //|----+----+----+----+----+----+----|    |----+----+----+----+----+----+----|
-     T_SM,    ,    ,    ,    ,    ,NEO ,     NEO ,    ,    ,    ,    ,    ,T_SM,
+     T_SM,NEO ,    ,    ,    ,    ,NEO ,     NEO ,    ,    ,    ,    ,NEO ,T_SM,
   //|----+----+----+----+----+----+----|    |----+----+----+----+----+----+----|
-     T_SM,    ,    ,    ,    ,    ,    ,         ,    ,    ,    ,    ,    ,T_SM,
+     T_SM,T_NR,    ,    ,    ,    ,    ,         ,    ,    ,    ,    ,T_NR,T_SM,
   //|----+----+----+----+----+----+----|    |----+----+----+----+----+----+----|
-         ,    ,T_CA,    ,T_CA,,        ,             ,,T_CA,    ,T_CA,    ,
+         ,    ,T_CA,T_CA,    ,,        ,             ,,    ,T_CA,T_CA,    ,
   //`----+----+----+----+----+----+----'    `----+----+----+----+----+----+----'
   ),
 
@@ -188,13 +188,19 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //`----+----+----+----+----+----+----'    `----+----+----+----+----+----+----'
   ),
 
-  [_ADJUST] = LAYOUT(
-    KC_PSCR, _______, KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12, \
-    QWERTY,  RESET,   _______, RGB_TOG, RGB_MOD, RGB_HUD, RGB_HUI, RGB_SAD, RGB_SAI, RGB_VAD, RGB_VAI, _______, KC_DEL,  _______, \
-    TG(_SWAPCTRLALT), _______, _______, _______, AU_ON,   AU_OFF,  AG_NORM, AG_SWAP, _______,  KC_MNXT, KC_VOLD, KC_VOLU, KC_MPLY, KC_MUTE, \
-    TG(_SWAPSHIFTMOD2), _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, \
-    _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______ \
-  )
+  [_ADJUST] = LAYOUT_kc(
+  //,----+----+----+----+----+----+----.    ,----+----+----+----+----+----+----.
+         ,    ,    ,    ,    ,    ,    ,         ,    ,    ,    ,    ,    ,    ,
+  //|----+----+----+----+----+----+----|    |----+----+----+----+----+----+----|
+         ,    ,    ,    ,    ,    ,    ,         ,    ,    ,    ,    ,    ,    ,
+  //|----+----+----+----+----+----+----|    |----+----+----+----+----+----+----|
+         ,    ,    ,    ,    ,    ,    ,         ,    ,    ,    ,    ,    ,    ,
+  //|----+----+----+----+----+----+----|    |----+----+----+----+----+----+----|
+         ,    ,    ,    ,    ,    ,    ,         ,    ,    ,    ,    ,    ,    ,
+  //|----+----+----+----+----+----+----|    |----+----+----+----+----+----+----|
+         ,    ,    ,    ,    ,,        ,             ,,    ,    ,    ,    ,
+  //`----+----+----+----+----+----+----'    `----+----+----+----+----+----+----'
+  ),
 
 };
 
@@ -229,11 +235,11 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
     case NUMPAD:
       if (record->event.pressed) {
-        layer_on(_NUMPAD);
+        layer_on(_NUMPAD2);
       } else {
-        layer_off(_NUMPAD);
+        layer_off(_NUMPAD2);
       }
-      update_tri_layer(_NUMPAD, _FUNCTION, _ADJUST);
+      update_tri_layer(_NUMPAD2, _FUNCTION, _ADJUST);
       return false;
 
     case FUNCTION:
@@ -243,7 +249,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         layer_off(_FUNCTION);
       }
       update_tri_layer(_CURSOR, _FUNCTION, _MOUSE);
-      update_tri_layer(_NUMPAD, _FUNCTION, _ADJUST);
+      update_tri_layer(_NUMPAD2, _FUNCTION, _ADJUST);
       return false;
       
     case ADJUST:
