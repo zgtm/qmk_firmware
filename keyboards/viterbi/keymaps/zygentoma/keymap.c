@@ -26,6 +26,7 @@ enum custom_keycodes {
   NUMPAD,
   CURSOR,
   ADJUST,
+  MOD3Y,
 };
 
 // Fillers to make layering more clear
@@ -44,6 +45,8 @@ enum custom_keycodes {
 #define KC_T_NR TG(_SWAPNUMBERS)
 #define KC_QWER QWERTY
 #define KC_RSET RESET
+#define KC_MD3Y MOD3Y
+
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_QWERTY] = LAYOUT_kc(
@@ -52,9 +55,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|----+----+----+----+----+----+----|    |----+----+----+----+----+----+----|
      TAB , Q  , W  , E  , R  , T  ,END ,     HOME, Y  , U  , I  , O  , P  ,LBRC,
   //|----+----+----+----+----+----+----|    |----+----+----+----+----+----+----|
-     NUHS, A  , S  , D  , F  , G  ,DEL ,     BSPC, H  , J  , K  , L  ,SCLN,NUHS,
+     NUHS, A  , S  , D  , F  , G  ,DEL ,     BSPC, H  , J  , K  , L  ,SCLN,MD3Y,
   //|----+----+----+----+----+----+----|    |----+----+----+----+----+----+----|
-     LSFT, Z  , X  , C  , V  , B  ,DEL ,     BSPC, N  , M  ,COMM,DOT ,SLSH,SH_Q,
+     LSFT, Z  , X  , C  , V  , B  ,DEL ,     BSPC, N  , M  ,COMM,DOT ,SLSH,RSFT,
   //|----+----+----+----+----+----+----|    |----+----+----+----+----+----+----|
      NMPD, FN ,LALT,LCTL,ENT ,NMPD,NMPD,     CUR ,CUR ,SPC ,RCTL,RALT, FN ,CUR
   //`----+----+----+----+----+----+----'    `----+----+----+----+----+----+----'
@@ -213,6 +216,9 @@ void persistent_default_layer_set(uint16_t default_layer) {
   default_layer_set(default_layer);
 }
 
+uint8_t mod3y_depressed = 0;
+uint8_t mod3y_other = 0;
+
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
     case QWERTY:
@@ -259,6 +265,30 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         layer_off(_ADJUST);
       }
       return false;
+      
+    case MOD3Y:
+      if (record->event.pressed) {
+        mod3y_depressed = 1;
+        mod3y_other = 0;
+      } else {
+        mod3y_depressed = 0;
+        if (mod3y_other) {
+          unregister_code16(KC_NUHS);
+        }
+        else {
+          register_code16(KC_QUOT);
+          unregister_code16(KC_QUOT);
+        }
+      }
+      return false;   
+        
+    default:
+      if (record->event.pressed) {
+        if (mod3y_depressed && !mod3y_other) {
+          register_code16(KC_NUHS);
+          mod3y_other = 1;
+        }
+      }
   }
   return true;
 }
