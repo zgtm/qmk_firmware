@@ -36,8 +36,8 @@ cp -r quantum/template/$KEYBOARD_TYPE/. keyboards/$KEYBOARD
 
 mv keyboards/${KEYBOARD}/template.c keyboards/${KEYBOARD}/${KEYBOARD_NAME}.c
 mv keyboards/${KEYBOARD}/template.h keyboards/${KEYBOARD}/${KEYBOARD_NAME}.h
-find keyboards/${KEYBOARD} -type f -exec sed -i '' -e "s;%KEYBOARD%;${KEYBOARD_NAME};g" {} \;
-find keyboards/${KEYBOARD} -type f -exec sed -i '' -e "s;%KEYBOARD_UPPERCASE%;${KEYBOARD_NAME_UPPERCASE};g" {} \;
+find keyboards/${KEYBOARD} -type f -exec sed -i -e "s;%KEYBOARD%;${KEYBOARD_NAME};g" {} \;
+find keyboards/${KEYBOARD} -type f -exec sed -i -e "s;%KEYBOARD_UPPERCASE%;${KEYBOARD_NAME_UPPERCASE};g" {} \;
 
 echo "######################################################"
 echo "# /keyboards/$KEYBOARD project created. To start"
