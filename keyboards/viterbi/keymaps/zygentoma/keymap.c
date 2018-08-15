@@ -12,20 +12,15 @@ extern keymap_config_t keymap_config;
 #define _FAKENEO 1
 #define _SWAPCTRLALT 2
 #define _SWAPSHIFTMOD2 3
-#define _SWAPNUMBERS 4
 #define _FUNCTION 11
 #define _CURSOR 12
 #define _NUMPAD 13
-#define _NUMPAD2 14
-#define _MOUSE 15
-#define _ADJUST 16
 
 enum custom_keycodes {
   QWERTY = SAFE_RANGE,
   FUNCTION,
   NUMPAD,
   CURSOR,
-  ADJUST,
   MOD3Y,
 };
 
@@ -33,29 +28,25 @@ enum custom_keycodes {
 #define KC_ KC_TRNS
 #define _______ KC_TRNS
 #define XXXXXXX KC_NO
-#define KC_FN FUNCTION
-#define KC_NMPD NUMPAD
-#define KC_CUR CURSOR
+#define KC_FN TT(_FUNCTION)
+#define KC_NMPD TT(_NUMPAD)
+#define KC_CUR TT(_CURSOR)
 #define KC_AJST ADJUST
-#define KC_MOUS MOUSE
 #define KC_SH_Q MT(MOD_RSFT, KC_QUOT)
 #define KC_NEO  TG(_FAKENEO)
 #define KC_T_CA TG(_SWAPCTRLALT)
 #define KC_T_SM TG(_SWAPSHIFTMOD2)
-#define KC_T_NR TG(_SWAPNUMBERS)
-#define KC_QWER QWERTY
 #define KC_RSET RESET
 #define KC_MD3Y MOD3Y
-
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_QWERTY] = LAYOUT_kc(
   //,----+----+----+----+----+----+----.    ,----+----+----+----+----+----+----.
-     ESC , 1  , 2  , 3  , 4  , 5  ,    ,         , 6  , 7  , 8  , 9  , 0  ,MINS,
+     ESC , F1 , F2 , F3 , F4 , F5 , F6 ,      F7 , F8 , F9 ,F10 ,F11 ,F12 ,MINS,
   //|----+----+----+----+----+----+----|    |----+----+----+----+----+----+----|
-     TAB , Q  , W  , E  , R  , T  ,END ,     HOME, Y  , U  , I  , O  , P  ,LBRC,
+     TAB , Q  , W  , E  , R  , T  ,    ,         , Y  , U  , I  , O  , P  ,LBRC,
   //|----+----+----+----+----+----+----|    |----+----+----+----+----+----+----|
-     NUHS, A  , S  , D  , F  , G  ,DEL ,     BSPC, H  , J  , K  , L  ,SCLN,MD3Y,
+     NUHS, A  , S  , D  , F  , G  ,    ,         , H  , J  , K  , L  ,SCLN,MD3Y,
   //|----+----+----+----+----+----+----|    |----+----+----+----+----+----+----|
      LSFT, Z  , X  , C  , V  , B  ,DEL ,     BSPC, N  , M  ,COMM,DOT ,SLSH,RSFT,
   //|----+----+----+----+----+----+----|    |----+----+----+----+----+----+----|
@@ -69,15 +60,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|----+----+----+----+----+----+----|    |----+----+----+----+----+----+----|
          , X  , V  , L  , C  , W  ,    ,         , K  , H  , G  , F  , Q  ,    ,
   //|----+----+----+----+----+----+----|    |----+----+----+----+----+----+----|
-         , U  , I  , A  , E  , O  ,    ,         , S  , N  , R  , T  , D  ,    ,
+         , U  , I  , A  , E  , O  ,    ,         , S  , N  , R  , T  , D  , Z  ,
   //|----+----+----+----+----+----+----|    |----+----+----+----+----+----+----|
-         ,LBRC,SCLN,QUOT, P  , Z  ,    ,         , B  , M  ,    ,    , J  ,    ,
+         ,LBRC,SCLN,QUOT, P  , Y  ,    ,         , B  , M  ,    ,    , J  ,    ,
   //|----+----+----+----+----+----+----|    |----+----+----+----+----+----+----|
          ,    ,    ,    ,    ,,        ,             ,,    ,    ,    ,    ,
   //`----+----+----+----+----+----+----'    `----+----+----+----+----+----+----'
   ),
-
-
 
   [_SWAPCTRLALT] = LAYOUT_kc(
   //,----+----+----+----+----+----+----.    ,----+----+----+----+----+----+----.
@@ -107,29 +96,15 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //`----+----+----+----+----+----+----'    `----+----+----+----+----+----+----'
   ),
 
-  [_SWAPNUMBERS] = LAYOUT_kc(
-  //,----+----+----+----+----+----+----.    ,----+----+----+----+----+----+----.
-         , 6  , 7  , 8  , 9  , 0  ,    ,         , 1  , 2  , 3  , 4  , 5  ,    ,
-  //|----+----+----+----+----+----+----|    |----+----+----+----+----+----+----|
-         ,    ,    ,    ,    ,    ,    ,         ,    ,    ,    ,    ,    ,    ,
-  //|----+----+----+----+----+----+----|    |----+----+----+----+----+----+----|
-         ,    ,    ,    ,    ,    ,    ,         ,    ,    ,    ,    ,    ,    ,
-  //|----+----+----+----+----+----+----|    |----+----+----+----+----+----+----|
-         ,    ,    ,    ,    ,    ,    ,         ,    ,    ,    ,    ,    ,    ,
-  //|----+----+----+----+----+----+----|    |----+----+----+----+----+----+----|
-         ,    ,    ,    ,    ,,        ,             ,,    ,    ,    ,    ,
-  //`----+----+----+----+----+----+----'    `----+----+----+----+----+----+----'
-  ),
-
   [_FUNCTION] = LAYOUT_kc(
   //,----+----+----+----+----+----+----.    ,----+----+----+----+----+----+----.
-     PSCR, F1 , F2 , F3 , F4 , F5 , F6 ,      F7 , F8 , F9 ,F10 ,F11 ,F12 ,    ,
+         ,    ,    ,BTN3,    ,    ,    ,         ,    ,    ,    ,    ,    ,    ,
   //|----+----+----+----+----+----+----|    |----+----+----+----+----+----+----|
-     RSET,    ,    ,    ,    ,    ,    ,         ,    ,MNXT,VOLD,VOLU,MPLY,MUTE,
+     RSET,    ,BTN1,MS_U,BTN2,    ,    ,         ,    ,MNXT,VOLD,VOLU,MPLY,MUTE,
   //|----+----+----+----+----+----+----|    |----+----+----+----+----+----+----|
-     T_SM,NEO ,    ,    ,    ,    ,NEO ,     NEO ,    ,    ,    ,    ,NEO ,T_SM,
+     T_SM,NEO ,MS_L,MS_D,MS_R,    ,NEO ,     NEO ,    ,    ,    ,    ,NEO ,T_SM,
   //|----+----+----+----+----+----+----|    |----+----+----+----+----+----+----|
-     T_SM,T_NR,    ,    ,    ,    ,    ,         ,    ,    ,    ,    ,T_NR,T_SM,
+     T_SM,   ,     ,    ,    ,    ,    ,         ,    ,    ,    ,    ,    ,T_SM,
   //|----+----+----+----+----+----+----|    |----+----+----+----+----+----+----|
          ,    ,T_CA,T_CA,    ,,        ,             ,,    ,T_CA,T_CA,    ,
   //`----+----+----+----+----+----+----'    `----+----+----+----+----+----+----'
@@ -149,35 +124,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //`----+----+----+----+----+----+----'    `----+----+----+----+----+----+----'
   ),
 
-  [_MOUSE] = LAYOUT_kc(
-  //,----+----+----+----+----+----+----.    ,----+----+----+----+----+----+----.
-         ,    ,    ,BTN3,    ,    ,    ,         ,    ,    ,    ,    ,    ,    ,
-  //|----+----+----+----+----+----+----|    |----+----+----+----+----+----+----|
-         ,    ,BTN1,MS_U,BTN2,    ,    ,         ,    ,    ,    ,    ,    ,    ,
-  //|----+----+----+----+----+----+----|    |----+----+----+----+----+----+----|
-         ,    ,MS_L,MS_D,MS_R,    ,    ,         ,    ,    ,    ,    ,    ,    ,
-  //|----+----+----+----+----+----+----|    |----+----+----+----+----+----+----|
-         ,    ,    ,    ,    ,    ,    ,         ,    ,    ,    ,    ,    ,    ,
-  //|----+----+----+----+----+----+----|    |----+----+----+----+----+----+----|
-         ,    ,    ,    ,    ,,        ,             ,,    ,    ,    ,    ,
-  //`----+----+----+----+----+----+----'    `----+----+----+----+----+----+----'
-  ),
-
   [_NUMPAD] = LAYOUT_kc(
-  //,----+----+----+----+----+----+----.    ,----+----+----+----+----+----+----.
-         ,    ,    ,    ,    ,    ,    ,         ,NLCK,PSLS,PAST,PMNS,    ,    ,
-  //|----+----+----+----+----+----+----|    |----+----+----+----+----+----+----|
-         ,    ,    ,    ,    ,    ,    ,         , P7 , P8 , P9 ,PPLS,    ,    ,
-  //|----+----+----+----+----+----+----|    |----+----+----+----+----+----+----|
-         ,    ,    ,    ,    ,    ,    ,         , P4 , P5 , P6 ,PEQL,    ,    ,
-  //|----+----+----+----+----+----+----|    |----+----+----+----+----+----+----|
-         ,    ,    ,    ,    ,    ,    ,         , P1 , P2 , P3 ,PENT,    ,    ,
-  //|----+----+----+----+----+----+----|    |----+----+----+----+----+----+----|
-         ,    ,    ,    ,    ,,        ,        P0   ,, P0 ,PDOT,PCMM,    ,
-  //`----+----+----+----+----+----+----'    `----+----+----+----+----+----+----'
-  ),
-
-  [_NUMPAD2] = LAYOUT_kc(
   //,----+----+----+----+----+----+----.    ,----+----+----+----+----+----+----.
          ,    ,    ,    ,    ,    ,    ,         ,    ,NLCK,PSLS,PAST,PMNS,    ,
   //|----+----+----+----+----+----+----|    |----+----+----+----+----+----+----|
@@ -187,85 +134,16 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|----+----+----+----+----+----+----|    |----+----+----+----+----+----+----|
          ,    ,    ,    ,    ,    ,    ,         ,    , P1 , P2 , P3 ,PENT,    ,
   //|----+----+----+----+----+----+----|    |----+----+----+----+----+----+----|
-         ,    ,    ,    ,    ,,        ,        P0   ,, P0 , P0 ,PDOT,PCMM,
+         ,    ,    ,    ,    ,,        ,        PENT ,, P0 ,PCMM,PDOT,PCMM,
   //`----+----+----+----+----+----+----'    `----+----+----+----+----+----+----'
   ),
-
-  [_ADJUST] = LAYOUT_kc(
-  //,----+----+----+----+----+----+----.    ,----+----+----+----+----+----+----.
-         ,    ,    ,    ,    ,    ,    ,         ,    ,    ,    ,    ,    ,    ,
-  //|----+----+----+----+----+----+----|    |----+----+----+----+----+----+----|
-         ,    ,    ,    ,    ,    ,    ,         ,    ,    ,    ,    ,    ,    ,
-  //|----+----+----+----+----+----+----|    |----+----+----+----+----+----+----|
-         ,    ,    ,    ,    ,    ,    ,         ,    ,    ,    ,    ,    ,    ,
-  //|----+----+----+----+----+----+----|    |----+----+----+----+----+----+----|
-         ,    ,    ,    ,    ,    ,    ,         ,    ,    ,    ,    ,    ,    ,
-  //|----+----+----+----+----+----+----|    |----+----+----+----+----+----+----|
-         ,    ,    ,    ,    ,,        ,             ,,    ,    ,    ,    ,
-  //`----+----+----+----+----+----+----'    `----+----+----+----+----+----+----'
-  ),
-
 };
-
-#ifdef AUDIO_ENABLE
-float tone_qwerty[][2]     = SONG(QWERTY_SOUND);
-#endif
-
-void persistent_default_layer_set(uint16_t default_layer) {
-  eeconfig_update_default_layer(default_layer);
-  default_layer_set(default_layer);
-}
 
 uint8_t mod3y_depressed = 0;
 uint8_t mod3y_other = 0;
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
-    case QWERTY:
-      if (record->event.pressed) {
-        #ifdef AUDIO_ENABLE
-          PLAY_NOTE_ARRAY(tone_qwerty, false, 0);
-        #endif
-        persistent_default_layer_set(1UL<<_QWERTY);
-      }
-      return false;
-
-    case CURSOR:
-      if (record->event.pressed) {
-        layer_on(_CURSOR);
-      } else {
-        layer_off(_CURSOR);
-      }
-      update_tri_layer(_CURSOR, _FUNCTION, _MOUSE);
-      return false;
-
-    case NUMPAD:
-      if (record->event.pressed) {
-        layer_on(_NUMPAD2);
-      } else {
-        layer_off(_NUMPAD2);
-      }
-      update_tri_layer(_NUMPAD2, _FUNCTION, _ADJUST);
-      return false;
-
-    case FUNCTION:
-      if (record->event.pressed) {
-        layer_on(_FUNCTION);
-      } else {
-        layer_off(_FUNCTION);
-      }
-      update_tri_layer(_CURSOR, _FUNCTION, _MOUSE);
-      update_tri_layer(_NUMPAD2, _FUNCTION, _ADJUST);
-      return false;
-      
-    case ADJUST:
-      if (record->event.pressed) {
-        layer_on(_ADJUST);
-      } else {
-        layer_off(_ADJUST);
-      }
-      return false;
-      
     case MOD3Y:
       if (record->event.pressed) {
         mod3y_depressed = 1;
@@ -280,8 +158,8 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
           unregister_code16(KC_QUOT);
         }
       }
-      return false;   
-        
+      return false;
+
     default:
       if (record->event.pressed) {
         if (mod3y_depressed && !mod3y_other) {

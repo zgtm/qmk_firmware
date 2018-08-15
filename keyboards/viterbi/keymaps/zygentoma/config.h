@@ -20,6 +20,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "../../config.h"
 
+#define TAPPING_TOGGLE 1
+
 /* Use I2C or Serial, not both */
 
 #define USE_SERIAL
@@ -44,5 +46,5 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define MOUSEKEY_TIME_TO_MAX       100
 #define MOUSEKEY_WHEEL_MAX_SPEED   8
 #define MOUSEKEY_WHEEL_TIME_TO_MAX 40
-        
+
 #endif
