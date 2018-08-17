@@ -28,9 +28,9 @@ enum custom_keycodes {
 #define KC_ KC_TRNS
 #define _______ KC_TRNS
 #define XXXXXXX KC_NO
-#define KC_FN TT(_FUNCTION)
-#define KC_NMPD TT(_NUMPAD)
-#define KC_CUR TT(_CURSOR)
+#define KC_FN MO(_FUNCTION)
+#define KC_NMPD MO(_NUMPAD)
+#define KC_CUR MO(_CURSOR)
 #define KC_AJST ADJUST
 #define KC_SH_Q MT(MOD_RSFT, KC_QUOT)
 #define KC_NEO  TG(_FAKENEO)
