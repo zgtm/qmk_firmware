@@ -22,6 +22,7 @@
 #define _FUNCTION 11
 #define _CURSOR 12
 #define _NUMPAD 13
+#define _FAKENUMPAD 14
 
 enum custom_keycodes {
   QWERTY = SAFE_RANGE,
@@ -34,8 +35,10 @@ enum custom_keycodes {
 // Fillers to make layering more clear
 #define KC_     KC_TRNS
 #define KC_FN   TT(_FUNCTION)
-#define KC_NMPD TT(_NUMPAD)
+#define KC_NMPD TT(_FAKENUMPAD)
+#define KC_NMPP TG(_NUMPAD)
 #define KC_CUR  TT(_CURSOR)
+#define KC_CURP TG(_CURSOR)
 #define KC_NEO  TG(_FAKENEO)
 #define KC_T_CA TG(_SWAPCTRLALT)
 #define KC_RSET RESET
@@ -53,7 +56,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       //--+----+----+----+----+----+----+----+----+----+----+----+----+----+----|
       LSFT,Z,   X,   C,   V,   B,   DEL,     ,BSPC,N,   M,   COMM,DOT, SLSH,RSFT,
       //--+----+----+----+----+----+----+----+----+----+----+----+----+----+----|
-      FN,  NMPD,LCTL,LALT,ENT, NMPD,NMPD,    ,CUR, CUR, SPC, RALT,RCTL,CUR, FN
+      FN,  NMPD,LCTL,LALT,ENT, NMPD,    ,    ,    ,CUR, SPC, RALT,RCTL,CUR, FN
       //--+----+----+----+----+----+----+----+----+----+----+----+----+----+----'
     ),
     [_CURSOR] = LAYOUT_ortho_5x15_kc(
@@ -67,6 +70,19 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
           ,    ,    ,    ,    ,    ,    ,    ,    ,    ,    ,    ,    ,    ,    ,
       //--+----+----+----+----+----+----+----+----+----+----+----+----+----+----|
           ,    ,    ,    ,    ,    ,    ,    ,    ,    ,    ,    ,    ,    ,
+      //--+----+----+----+----+----+----+----+----+----+----+----+----+----+----'
+    ),
+    [_FAKENUMPAD] = LAYOUT_ortho_5x15_kc(
+      //--+----+----+----+----+----+----+----+----+----+----+----+----+----+----.
+          ,    ,    ,    ,    ,    ,    ,    ,    ,    ,    ,    ,    ,    ,    ,
+      //--+----+----+----+----+----+----+----+----+----+----+----+----+----+----|
+          ,    ,    ,    ,    ,    ,    ,    ,    ,    , 7  , 8  , 9  ,PPLS,    ,
+      //--+----+----+----+----+----+----+----+----+----+----+----+----+----+----|
+          ,    ,    ,    ,    ,    ,    ,    ,    ,    , 4  , 5  , 6  ,PEQL,    ,
+      //--+----+----+----+----+----+----+----+----+----+----+----+----+----+----|
+          ,    ,    ,    ,    ,    ,    ,    ,    ,    , 1  , 2  , 3  ,PENT,    ,
+      //--+----+----+----+----+----+----+----+----+----+----+----+----+----+----|
+          ,    ,    ,    ,    ,    ,    ,    ,    ,    , 0  ,PCMM,PDOT,PCMM,
       //--+----+----+----+----+----+----+----+----+----+----+----+----+----+----'
     ),
     [_NUMPAD] = LAYOUT_ortho_5x15_kc(
@@ -118,7 +134,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       //--+----+----+----+----+----+----+----+----+----+----+----+----+----+----|
           ,   ,     ,    ,    ,    ,    ,    ,    ,    ,    ,    ,    ,    ,    ,
       //--+----+----+----+----+----+----+----+----+----+----+----+----+----+----|
-          ,    ,T_CA,T_CA,    ,    ,    ,    ,    ,    ,    ,T_CA,T_CA,    ,
+          ,    ,T_CA,T_CA,    ,NMPP,    ,    ,    ,CURP,    ,T_CA,T_CA,    ,
       //--+----+----+----+----+----+----+----+----+----+----+----+----+----+----'
   ),
 };
